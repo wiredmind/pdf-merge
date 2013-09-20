@@ -14,7 +14,6 @@ print(
     '>>>', end=" "
     )
 
-
 while True:
     type = msvcrt.getch()
     if type == chr(49):        
