@@ -1,10 +1,19 @@
+from __future__ import print_function
+from PyPDF2 import PdfFileReader, PdfFileWriter
+from time import sleep
 import sys
 import os
 import msvcrt
-from PyPDF2 import PdfFileReader, PdfFileWriter
 
-print 'Choose the type of the document you are creating'
-sys.stdout.write('(1) Inspection\n(2) Right of Entry\n(3) Other\n\n>>> ')
+print(
+    'Choose the type of the document you are creating\n'
+    '(1) Inspection\n'
+    '(2) Right of Entry\n'
+    '(3) Other\n'
+    '\n'
+    '>>>', end=" "
+    )
+
 
 while True:
     type = msvcrt.getch()
@@ -20,19 +29,29 @@ while True:
 os.system('cls')
 
 if suffix == 'OTHER':
-    print """# Selected document type: {}
-# File name will not be appened.
-""".format(suffix)
+    print(
+        '# Selected document type: {}\n'
+        '# File name will not be appened.\n'
+        .format(suffix)
+        )
 else:
-    print """# Selected document type: {}
-# File name will be appened with _{}
-""".format(suffix, suffix)
+    print(
+        '# Selected document type: {}\n'
+        '# File name will be appened with _{}\n'
+        .format(suffix, suffix))
 
 fileName = raw_input('Enter file name (and press Enter): ')
 
-root = os.path.split(sys.argv[1])[0]
-fileName = fileName.upper() + '_' + suffix + '.pdf'
-destination = os.path.join(root, fileName)
+try:
+    root = os.path.split(sys.argv[1])[0]
+    fileName = fileName.upper() + '_' + suffix + '.pdf'
+    destination = os.path.join(root, fileName)
+except IndexError:
+    os.system('color 0C')
+    print("# Error: No files received for processing.")
+    sleep(3)
+    os.system('color 07')
+    exit()
 
 fileList = sys.argv[1:]
 fileList.sort()
