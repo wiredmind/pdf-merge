@@ -1,4 +1,3 @@
-from __future__ import print_function
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from time import sleep
 import sys
@@ -16,13 +15,13 @@ print(
 
 while True:
     type = msvcrt.getch()
-    if type == chr(49):        
+    if type == b'1':        
         suffix = 'INSPECTION'
         break
-    elif type == chr(50):
+    elif type == b'2':
         suffix = "RIGHT OF ENTRY"
         break
-    elif type == chr(51):
+    elif type == b'3':
         suffix = "OTHER"
         break
 os.system('cls')
@@ -39,7 +38,7 @@ else:
         '# File name will be appened with _{}\n'
         .format(suffix, suffix))
 
-fileName = raw_input('Enter file name (and press Enter): ')
+fileName = input('Enter file name (and press Enter): ')
 
 try:
     root = os.path.split(sys.argv[1])[0]
